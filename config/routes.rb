@@ -7,13 +7,16 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
 
-  get 'sessions/create'
-  get 'sessions/destroy'
-  resources :users
-  resources :orders
-  resources :line_items
-  resources :carts
-  root 'store#index', as: 'store_index'
+  scope '(:locale)' do
+    get 'sessions/create'
+    get 'sessions/destroy'
+    resources :users
+    resources :orders
+    resources :line_items
+    resources :carts
+    root 'store#index', as: 'store_index'
+  end
+
   resources :products do
     get :who_bought, on: :member
   end
